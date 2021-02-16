@@ -5,12 +5,14 @@ let pool;
 module.exports = {
   getPool: (test = false) => {
     if (pool) return pool;
-    let prefix = !test ? "DB_" : "DB_TEST_";
+    const param = (param) =>
+      settings[!test ? `DB_${param}` : `DB_TEST_${param}`];
+
     pool = mysql.createPool({
-      host: settings[prefix + "HOST"],
-      user: settings[prefix + "USER"],
-      password: settings[prefix + "PASS"],
-      database: settings[prefix + "NAME"],
+      host: param("HOST"),
+      user: param("USER"),
+      password: param("PASS"),
+      database: param("NAME"),
     });
     return pool;
   },
