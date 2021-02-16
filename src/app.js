@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const prompts = require("./prompts");
 const cTable = require("console.table");
 const services = require("./services");
+const controllers = require("./controllers");
 
 const start = () => {
   inquirer.prompt(prompts.getMenuPrompts()).then((answer) => {
@@ -16,11 +17,7 @@ const start = () => {
       case prompts.choices.add_emp:
         break;
       case prompts.choices.view_dep:
-        services.departments.getAllDepartments((res) => {
-          console.clear();
-          console.table(res);
-          start();
-        });
+        controllers.departments.showAllDeps(() => start());
         break;
       case prompts.choices.view_roles:
         break;
