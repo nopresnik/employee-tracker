@@ -1,36 +1,61 @@
 const db = require("../db/database");
 const connection = db.getConnection();
 
-const getAllDepartments = (done) => {
-  connection.query("SELECT * FROM department", (err, res) => {
-    if (err) throw err;
+const getAllDepartments = () => {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT * FROM department", (err, res) => {
+      if (err) reject(err);
 
-    done(res);
+      resolve(res);
+    });
   });
 };
 
-const createDepartment = (name, done) => {
-  connection.query(
-    "INSERT INTO department(name) VALUES (?)",
-    name,
-    (err, res) => {
-      if (err) throw err;
+const getDepByName = (name) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM department WHERE name = ?",
+      name,
+      (err, res) => {
+        if (err) reject(err);
 
-      done(res);
-    }
-  );
+        resolve(res[0]);
+      }
+    );
+  });
 };
 
-const deleteDepartment = (name, done) => {
-  connection.query(
-    "DELETE FROM department WHERE name = ?",
-    name,
-    (err, res) => {
-      if (err) throw err;
+const createDepartment = (name) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "INSERT INTO department(name) VALUES (?)",
+      name,
+      (err, res) => {
+        if (err) reject(err);
 
-      done(res);
-    }
-  );
+        resolve(res);
+      }
+    );
+  });
 };
 
-module.exports = { getAllDepartments, createDepartment, deleteDepartment };
+const deleteDepartment = (name) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "DELETE FROM department WHERE name = ?",
+      name,
+      (err, res) => {
+        if (err) reject(err);
+
+        resolve(res);
+      }
+    );
+  });
+};
+
+module.exports = {
+  getAllDepartments,
+  getDepByName,
+  createDepartment,
+  deleteDepartment,
+};

@@ -1,57 +1,67 @@
 const db = require("../db/database");
 const connection = db.getConnection();
 
-const getAllEmployees = (done) => {
-  connection.query("SELECT * FROM employee", (err, res) => {
-    if (err) throw err;
+const getAllEmployees = () => {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT * FROM employee", (err, res) => {
+      if (err) reject(err);
 
-    done(res);
+      resolve(res);
+    });
   });
 };
 
-const getEmployeeById = (id, done) => {
-  connection.query("SELECT * FROM employee WHERE id = ?", id, (err, res) => {
-    if (err) throw err;
+const getEmployeeById = (id) => {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT * FROM employee WHERE id = ?", id, (err, res) => {
+      if (err) reject(err);
 
-    done(res);
+      resolve(res);
+    });
   });
 };
 
-const getEmployeeByName = (firstName, lastName, done) => {
-  connection.query(
-    "SELECT * FROM employee WHERE first_name = ? AND last_name = ?",
-    [firstName, lastName],
-    (err, res) => {
-      if (err) throw err;
+const getEmployeeByName = (firstName, lastName) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM employee WHERE first_name = ? AND last_name = ?",
+      [firstName, lastName],
+      (err, res) => {
+        if (err) reject(err);
 
-      done(res);
-    }
-  );
+        resolve(res);
+      }
+    );
+  });
 };
 
-const createEmployee = (employee, done) => {
-  const { firstName, lastName, roleId, managerId } = employee;
-  connection.query(
-    "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?)",
-    [[firstName, lastName, roleId, managerId]],
-    (err, res) => {
-      if (err) throw err;
+const createEmployee = (employee) => {
+  return new Promise((resolve, reject) => {
+    const { firstName, lastName, roleId, managerId } = employee;
+    connection.query(
+      "INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES (?)",
+      [[firstName, lastName, roleId, managerId]],
+      (err, res) => {
+        if (err) reject(err);
 
-      done(res);
-    }
-  );
+        resolve(res);
+      }
+    );
+  });
 };
 
-const deleteEmployee = (firstName, lastName, done) => {
-  connection.query(
-    "DELETE FROM employee WHERE first_name = ? AND last_name = ?",
-    [firstName, lastName],
-    (err, res) => {
-      if (err) throw err;
+const deleteEmployee = (firstName, lastName) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "DELETE FROM employee WHERE first_name = ? AND last_name = ?",
+      [firstName, lastName],
+      (err, res) => {
+        if (err) reject(err);
 
-      done(res);
-    }
-  );
+        resolve(res);
+      }
+    );
+  });
 };
 
 module.exports = {
