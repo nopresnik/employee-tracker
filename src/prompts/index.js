@@ -58,9 +58,19 @@ const getAddEmpPrompts = (roles, managers) => [
   },
 ];
 
+const getUpdateEmpPrompts = (employees) => [
+  {
+    type: "list",
+    name: "empList",
+    message: "Select the employee you would like to update:",
+    choices: employees,
+  },
+];
+
 module.exports = {
   choices,
   getMenuPrompts,
   getAddDepPrompts,
   getAddEmpPrompts,
+  getUpdateEmpPrompts,
 };
