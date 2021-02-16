@@ -1,42 +1,32 @@
 const db = require("../db/database");
-const pool = db.getPool();
+const connection = db.getConnection();
 
 const getAllRoles = (done) => {
-  pool.getConnection((err, connection) => {
+  connection.query("SELECT * FROM role", (err, res) => {
     if (err) throw err;
-    connection.query("SELECT * FROM role", (err, res) => {
-      if (err) throw err;
 
-      done(res);
-    });
+    done(res);
   });
 };
 
 const createRole = (role, done) => {
   const { title, salary, department } = role;
-  pool.getConnection((err, connection) => {
-    if (err) throw err;
-    connection.query(
-      "INSERT INTO role(title, salary, department_id) VALUES (?)",
-      [[title, salary, department]],
-      (err, res) => {
-        if (err) throw err;
-
-        done(res);
-      }
-    );
-  });
-};
-
-const deleteRole = (title, done) => {
-  pool.getConnection((err, connection) => {
-    if (err) throw err;
-
-    connection.query("DELETE FROM role WHERE title = ?", title, (err, res) => {
+  connection.query(
+    "INSERT INTO role(title, salary, department_id) VALUES (?)",
+    [[title, salary, department]],
+    (err, res) => {
       if (err) throw err;
 
       done(res);
-    });
+    }
+  );
+};
+
+const deleteRole = (title, done) => {
+  connection.query("DELETE FROM role WHERE title = ?", title, (err, res) => {
+    if (err) throw err;
+
+    done(res);
   });
 };
 
