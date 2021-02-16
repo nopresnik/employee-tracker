@@ -12,6 +12,32 @@ const getAllEmployees = (done) => {
   });
 };
 
+const getEmployeeById = (id, done) => {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    connection.query("SELECT * FROM employee WHERE id = ?", id, (err, res) => {
+      if (err) throw err;
+
+      done(res);
+    });
+  });
+};
+
+const getEmployeeByName = (firstName, lastName, done) => {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    connection.query(
+      "SELECT * FROM employee WHERE first_name = ? AND last_name = ?",
+      [firstName, lastName],
+      (err, res) => {
+        if (err) throw err;
+
+        done(res);
+      }
+    );
+  });
+};
+
 const createEmployee = (employee, done) => {
   const { firstName, lastName, roleId, managerId } = employee;
   pool.getConnection((err, connection) => {
@@ -44,4 +70,10 @@ const deleteEmployee = (firstName, lastName, done) => {
   });
 };
 
-module.exports = { getAllEmployees, createEmployee, deleteEmployee };
+module.exports = {
+  getAllEmployees,
+  getEmployeeById,
+  getEmployeeByName,
+  createEmployee,
+  deleteEmployee,
+};
