@@ -1,6 +1,13 @@
 module.exports = {
+  // Prod database //
   DB_HOST: "localhost",
   DB_USER: "root",
   DB_PASS: "",
   DB_NAME: "employee-tracker",
+
+  // Testing database //
+  DB_TEST_HOST: "localhost",
+  DB_TEST_USER: "root",
+  DB_TEST_PASS: "",
+  DB_TEST_NAME: "employee-tracker-test",
 };
