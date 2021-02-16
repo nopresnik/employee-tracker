@@ -16,7 +16,7 @@ const createDepartment = (name, done) => {
   pool.getConnection((err, connection) => {
     if (err) throw err;
     connection.query(
-      "INSERT INTO department(title) VALUES (?)",
+      "INSERT INTO department(name) VALUES (?)",
       name,
       (err, res) => {
         if (err) throw err;
