@@ -28,7 +28,7 @@ const createEmployee = (employee, done) => {
   });
 };
 
-const deleteEmployee = (firstName, lastName) => {
+const deleteEmployee = (firstName, lastName, done) => {
   pool.getConnection((err, connection) => {
     if (err) throw err;
 
