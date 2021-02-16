@@ -8,7 +8,7 @@ const choices = {
   update_emp: "Update employee",
 };
 
-const menu = [
+const getMenuPrompts = () => [
   {
     type: "list",
     name: "action",
@@ -25,7 +25,7 @@ const menu = [
   },
 ];
 
-const addDep = [
+const getAddDepPrompts = () => [
   {
     type: "input",
     name: "depName",
@@ -35,6 +35,6 @@ const addDep = [
 
 module.exports = {
   choices,
-  menu,
-  addDep,
+  getMenuPrompts,
+  getAddDepPrompts,
 };
