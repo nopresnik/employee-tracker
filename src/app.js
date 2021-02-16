@@ -12,7 +12,8 @@ const inquirer = require("inquirer");
 const prompts = require("./prompts");
 
 const start = () => {
-  inquirer.prompt(prompts.prompts);
+  // inquirer.prompt(prompts.main.prompts);
+  inquirer.prompt(prompts.addDepartment.prompts);
 };
 
 module.exports = { start };
