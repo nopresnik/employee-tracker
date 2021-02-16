@@ -5,11 +5,12 @@ let pool;
 module.exports = {
   getPool: (test = false) => {
     if (pool) return pool;
+    let prefix = !test ? "DB_" : "DB_TEST_";
     pool = mysql.createPool({
-      host: !test ? settings.DB_HOST : settings.DB_TEST_HOST,
-      user: !test ? settings.DB_USER : settings.DB_TEST_USER,
-      password: !test ? settings.DB_PASS : settings.DB_TEST_TEST_PASS,
-      database: !test ? settings.DB_NAME : settings.DB_TEST_TEST_NAME,
+      host: settings[prefix + "HOST"],
+      user: settings[prefix + "USER"],
+      password: settings[prefix + "PASS"],
+      database: settings[prefix + "NAME"],
     });
     return pool;
   },
