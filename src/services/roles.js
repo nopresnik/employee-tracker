@@ -1,51 +1,71 @@
 const db = require("../db/database");
-const connection = db.getConnection();
+const pool = db;
 
 const getAllRoles = (done) => {
   return new Promise((resolve, reject) => {
-    connection.query("SELECT * FROM role", (err, res) => {
-      if (err) reject(err);
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query("SELECT * FROM role", (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+      });
 
-      resolve(res);
+      connection.release();
     });
   });
 };
 
 const getRoleByTitle = (title) => {
   return new Promise((resolve, reject) => {
-    connection.query(
-      "SELECT * FROM role WHERE title = ?",
-      title,
-      (err, res) => {
-        if (err) reject(err);
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "SELECT * FROM role WHERE title = ?",
+        title,
+        (err, res) => {
+          if (err) reject(err);
+          resolve(res[0]);
+        }
+      );
 
-        resolve(res[0]);
-      }
-    );
+      connection.release();
+    });
   });
 };
 
 const createRole = (role, done) => {
   return new Promise((resolve, reject) => {
     const { title, salary, department } = role;
-    connection.query(
-      "INSERT INTO role(title, salary, department_id) VALUES (?)",
-      [[title, salary, department]],
-      (err, res) => {
-        if (err) reject(err);
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "INSERT INTO role(title, salary, department_id) VALUES (?)",
+        [[title, salary, department]],
+        (err, res) => {
+          if (err) reject(err);
+          resolve(res);
+        }
+      );
 
-        resolve(res);
-      }
-    );
+      connection.release();
+    });
   });
 };
 
 const deleteRole = (title) => {
   return new Promise((resolve, reject) => {
-    connection.query("DELETE FROM role WHERE title = ?", title, (err, res) => {
-      if (err) reject(err);
+    pool.getConnection((err, connection) => {
+      if (err) throw err;
+      connection.query(
+        "DELETE FROM role WHERE title = ?",
+        title,
+        (err, res) => {
+          if (err) reject(err);
+          resolve(res);
+        }
+      );
 
-      resolve(res);
+      connection.release();
     });
   });
 };
