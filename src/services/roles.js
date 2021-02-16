@@ -11,6 +11,20 @@ const getAllRoles = (done) => {
   });
 };
 
+const getRoleByTitle = (title) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM role WHERE title = ?",
+      title,
+      (err, res) => {
+        if (err) reject(err);
+
+        resolve(res[0]);
+      }
+    );
+  });
+};
+
 const createRole = (role, done) => {
   return new Promise((resolve, reject) => {
     const { title, salary, department } = role;
@@ -36,4 +50,4 @@ const deleteRole = (title) => {
   });
 };
 
-module.exports = { getAllRoles, createRole, deleteRole };
+module.exports = { getAllRoles, getRoleByTitle, createRole, deleteRole };
