@@ -33,8 +33,34 @@ const getAddDepPrompts = () => [
   },
 ];
 
+const getAddEmpPrompts = (roles, managers) => [
+  {
+    type: "input",
+    name: "empFirstName",
+    message: "Enter first name:",
+  },
+  {
+    type: "input",
+    name: "empLastName",
+    message: "Enter last name:",
+  },
+  {
+    type: "list",
+    name: "empRole",
+    message: "Select employee's role:",
+    choices: roles,
+  },
+  {
+    type: "list",
+    name: "empManager",
+    message: "Select employee's manager:",
+    choices: managers,
+  },
+];
+
 module.exports = {
   choices,
   getMenuPrompts,
   getAddDepPrompts,
+  getAddEmpPrompts,
 };
