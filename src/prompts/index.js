@@ -33,6 +33,25 @@ const getAddDepPrompts = () => [
   },
 ];
 
+const getAddRolePrompts = (departments) => [
+  {
+    type: "input",
+    name: "roleTitle",
+    message: "Enter new role title:",
+  },
+  {
+    type: "input",
+    name: "roleSalary",
+    message: "Enter new role salary:",
+  },
+  {
+    type: "list",
+    name: "roleDepartment",
+    message: "Select new role department:",
+    choices: departments,
+  },
+];
+
 const getAddEmpPrompts = (roles, managers) => [
   {
     type: "input",
@@ -83,6 +102,7 @@ module.exports = {
   choices,
   getMenuPrompts,
   getAddDepPrompts,
+  getAddRolePrompts,
   getAddEmpPrompts,
   getUpdateEmpPrompts,
 };
