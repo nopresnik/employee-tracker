@@ -6,8 +6,8 @@ module.exports = {
     const param = (param) =>
       settings[!test ? `DB_${param}` : `DB_TEST_${param}`];
 
-    connection = mysql.createConnection({
-      connectLimit: 10,
+    connection = mysql.createPool({
+      connectionLimit: 100,
       host: param("HOST"),
       user: param("USER"),
       password: param("PASS"),
