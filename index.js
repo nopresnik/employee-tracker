@@ -4,10 +4,4 @@ const app = require("./src/app");
 
 const services = require("./src/services");
 
-const newRole = {
-  title: "Test role",
-  salary: 50000,
-  department: 1,
-};
-
-services.roles.createRole(newRole, (res) => console.log(res));
+// services.roles.deleteRole("Test", (res) => console.log(res.affectedRows));

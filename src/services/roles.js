@@ -28,4 +28,16 @@ const createRole = (role, done) => {
   });
 };
 
-module.exports = { getAllRoles, createRole };
+const deleteRole = (title, done) => {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+
+    connection.query("DELETE FROM role WHERE title = ?", title, (err, res) => {
+      if (err) throw err;
+
+      done(res);
+    });
+  });
+};
+
+module.exports = { getAllRoles, createRole, deleteRole };
