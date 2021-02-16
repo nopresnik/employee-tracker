@@ -7,6 +7,7 @@ module.exports = {
       settings[!test ? `DB_${param}` : `DB_TEST_${param}`];
 
     connection = mysql.createConnection({
+      connectLimit: 10,
       host: param("HOST"),
       user: param("USER"),
       password: param("PASS"),
