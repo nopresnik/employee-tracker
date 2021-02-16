@@ -1,70 +1,37 @@
-const db = require("../db/database");
-const pool = db.getConnection();
+const pool = require("../db/database");
 
 const getAllDepartments = () => {
   return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      connection.query("SELECT * FROM department", (err, res) => {
-        if (err) reject(err);
-        resolve(res);
-      });
-
-      connection.release();
+    pool.query("SELECT * FROM department", (err, res) => {
+      if (err) reject(err);
+      resolve(res);
     });
   });
 };
 
 const getDepByName = (name) => {
   return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      connection.query(
-        "SELECT * FROM department WHERE name = ?",
-        name,
-        (err, res) => {
-          if (err) reject(err);
-          resolve(res[0]);
-        }
-      );
-
-      connection.release();
+    pool.query("SELECT * FROM department WHERE name = ?", name, (err, res) => {
+      if (err) reject(err);
+      resolve(res[0]);
     });
   });
 };
 
 const createDepartment = (name) => {
   return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      connection.query(
-        "INSERT INTO department(name) VALUES (?)",
-        name,
-        (err, res) => {
-          if (err) reject(err);
-          resolve(res);
-        }
-      );
-
-      connection.release();
+    pool.query("INSERT INTO department(name) VALUES (?)", name, (err, res) => {
+      if (err) reject(err);
+      resolve(res);
     });
   });
 };
 
 const deleteDepartment = (name) => {
   return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      connection.query(
-        "DELETE FROM department WHERE name = ?",
-        name,
-        (err, res) => {
-          if (err) reject(err);
-          resolve(res);
-        }
-      );
-
-      connection.release();
+    pool.query("DELETE FROM department WHERE name = ?", name, (err, res) => {
+      if (err) reject(err);
+      resolve(res);
     });
   });
 };

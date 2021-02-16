@@ -1,18 +1,11 @@
 const settings = require("./db.config");
 const mysql = require("mysql");
 
-module.exports = {
-  getConnection: (test = false) => {
-    const param = (param) =>
-      settings[!test ? `DB_${param}` : `DB_TEST_${param}`];
+const pool = mysql.createPool({
+  host: settings.DB_HOST,
+  user: settings.DB_USER,
+  password: settings.DB_PASS,
+  database: settings.DB_NAME,
+});
 
-    connection = mysql.createPool({
-      connectionLimit: 100,
-      host: param("HOST"),
-      user: param("USER"),
-      password: param("PASS"),
-      database: param("NAME"),
-    });
-    return connection;
-  },
-};
+module.exports = pool;
