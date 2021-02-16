@@ -4,16 +4,17 @@ const prompts = require("../prompts");
 const dbConfig = require("../db/db.config");
 
 const showAllDeps = async (cb) => {
-  const deps = await services.departments.getAllDepartments();
-  console.clear();
-  console.table(deps);
-  cb();
+  services.departments.getAllDepartments().then((deps) => {
+    console.clear();
+    console.table(deps);
+    cb();
+  });
 };
 
 const addNewDep = (cb) => {
   inquirer.prompt(prompts.getAddDepPrompts()).then((answer) => {
     const { depName } = answer;
-    services.departments.createDepartment(depName, () => {
+    services.departments.createDepartment(depName).then(() => {
       cb();
     });
   });
