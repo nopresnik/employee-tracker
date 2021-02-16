@@ -58,12 +58,24 @@ const getAddEmpPrompts = (roles, managers) => [
   },
 ];
 
-const getUpdateEmpPrompts = (employees) => [
+const getUpdateEmpPrompts = (employees, roles, managers) => [
   {
     type: "list",
     name: "empList",
     message: "Select the employee you would like to update:",
     choices: employees,
+  },
+  {
+    type: "list",
+    name: "empRole",
+    message: "Select employee's new role:",
+    choices: roles,
+  },
+  {
+    type: "list",
+    name: "empManager",
+    message: "Select employee's new role:",
+    choices: managers,
   },
 ];
 
