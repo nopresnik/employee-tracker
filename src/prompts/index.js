@@ -73,7 +73,7 @@ const getAddEmpPrompts = (roles, managers) => [
     type: "list",
     name: "empManager",
     message: "Select employee's manager:",
-    choices: managers,
+    choices: ["None", ...managers],
   },
 ];
 
