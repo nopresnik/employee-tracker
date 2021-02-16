@@ -16,12 +16,20 @@ const start = () => {
       case prompts.choices.add_emp:
         break;
       case prompts.choices.view_dep:
+        services.departments.getAllDepartments((res) => {
+          console.clear();
+          console.table(res);
+          start();
+        });
         break;
       case prompts.choices.view_roles:
         break;
       case prompts.choices.view_emp:
-        services.employees.getAllEmployees((result) => console.table(result));
-        start();
+        services.employees.getAllEmployees((result) => {
+          console.clear();
+          console.table(result);
+          start();
+        });
         break;
       case prompts.choices.update_emp:
         break;
