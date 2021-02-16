@@ -1,5 +1,5 @@
 const db = require("../../../src/db/database");
-const pool = db.getPool();
+const pool = db.getPool(true);
 
 describe("Databse tests", () => {
   it("Connection is successful", (done) => {
