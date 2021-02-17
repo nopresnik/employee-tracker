@@ -21,6 +21,7 @@ const getMenuPrompts = () => [
       choices.view_roles,
       choices.view_emp,
       choices.update_emp,
+      "Exit",
     ],
   },
 ];
