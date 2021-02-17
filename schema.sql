@@ -1,18 +1,24 @@
-CREATE TABLE `employee-tracker`.`employee` (
-  `id` INT NOT NULL,
-  `first_name` VARCHAR(30) NULL,
-  `last_name` VARCHAR(30) NULL,
-  `role_id` INT NULL,
-  `manager_id` INT NULL,
-  PRIMARY KEY (`id`));
+CREATE DATABASE `employee-tracker`;
 
-CREATE TABLE `employee-tracker`.`department` (
-  `id` INT NOT NULL,
-  `name` VARCHAR(30) NULL,
-  PRIMARY KEY (`id`));
+CREATE TABLE `department` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `employee-tracker`.`role` (
-  `id` INT NOT NULL,
-  `salary` DECIMAL(2) NULL,
-  `department_id` INT NULL,
-  PRIMARY KEY (`id`));
+CREATE TABLE `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(30) DEFAULT NULL,
+  `last_name` varchar(30) DEFAULT NULL,
+  `role_id` int DEFAULT NULL,
+  `manager_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `role` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `salary` int DEFAULT NULL,
+  `department_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
