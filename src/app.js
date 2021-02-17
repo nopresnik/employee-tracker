@@ -29,6 +29,7 @@ const start = () => {
         controllers.employees.showAllEmployees(() => start());
         break;
       case prompts.choices.update_emp:
+        controllers.employees.showUpdateEmployee(() => start());
         break;
       default:
         return;

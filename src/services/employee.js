@@ -64,10 +64,24 @@ const deleteEmployee = (firstName, lastName) => {
   });
 };
 
+const updateEmployee = (id, newRole, newManager) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "UPDATE employee SET role_id = ?, manager_id = ? WHERE id = ?",
+      [newRole, newManager, id],
+      (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+      }
+    );
+  });
+};
+
 module.exports = {
   getAllEmployees,
   getEmployeeById,
   getEmployeeByName,
   createEmployee,
   deleteEmployee,
+  updateEmployee,
 };
