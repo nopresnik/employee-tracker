@@ -15,6 +15,7 @@ const addNewDep = (cb) => {
   inquirer.prompt(prompts.getAddDepPrompts()).then((answer) => {
     const { depName } = answer;
     services.departments.createDepartment(depName).then(() => {
+      console.clear();
       cb();
     });
   });

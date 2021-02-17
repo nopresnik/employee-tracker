@@ -11,6 +11,7 @@ const showAllRoles = async (cb) => {
 };
 
 const addNewRole = async (cb) => {
+  console.clear();
   let departments = await services.departments.getAllDepartments();
   departments = departments.map((dep) => dep.name);
 

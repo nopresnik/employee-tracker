@@ -12,6 +12,7 @@ const showAllEmployees = (cb) => {
 };
 
 const addNewEmployee = async (cb) => {
+  console.clear();
   let roles = await services.roles.getAllRoles();
   let managers = await services.employees.getAllEmployees();
 
@@ -49,6 +50,7 @@ const addNewEmployee = async (cb) => {
 };
 
 const showUpdateEmployee = async (cb) => {
+  console.clear();
   let employees = await services.employees.getAllEmployees();
   let roles = await services.roles.getAllRoles();
 
