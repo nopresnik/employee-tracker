@@ -2,10 +2,16 @@ const pool = require("../db/database");
 
 const getAllEmployees = () => {
   return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM employee", (err, res) => {
-      if (err) reject(err);
-      resolve(res);
-    });
+    pool.query(
+      `SELECT e.id, e.first_name as Name, e.last_name as Surname, d.name as Department, r.title as Title, r.salary as Salary 
+       FROM employee e 
+       JOIN role r on e.role_id = r.id
+       JOIN department d on r.department_id = d.id`,
+      (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+      }
+    );
   });
 };
 
